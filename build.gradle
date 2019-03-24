@@ -4,11 +4,8 @@ plugins {
     id 'jacoco'
     id 'checkstyle'
     id 'pmd'
-    id "com.github.spotbugs" version "1.7.1"
-//    id 'idea' // optional (to generate IntelliJ IDEA project files)
+    id 'com.github.spotbugs' version '1.7.1'
 }
-
-// gradle site
 
 repositories {
     mavenCentral()
@@ -40,11 +37,9 @@ checkstyle {
 }
 
 pmd {
-//    ignoreFailures = true
     ruleSetFiles "pmd-rules.xml"
     ruleSets = []
 }
-
 
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
     reports {
