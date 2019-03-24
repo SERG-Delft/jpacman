@@ -5,4 +5,9 @@ before_install:
 jdk:
   - oraclejdk8
   - oraclejdk9
-script: "mvn clean test"
+jobs:
+  include:
+    - stage: "Test"
+      script: ./gradlew test
+    - stage: "Static Analysis"
+      script: ./gradlew staticAnalysis
