@@ -22,9 +22,14 @@ class BoardFactoryTest {
     private BoardFactory factory;
 
     /**
-     * Squares on the board to test.
+     * Square on the board to test.
      */
-    private Square s1, s2;
+    private Square s1;
+
+    /**
+     * Square on the board to test.
+     */
+    private Square s2;
 
     /**
      * Resets the factory under test.

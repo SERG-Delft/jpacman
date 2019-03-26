@@ -1,0 +1,63 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'jacoco'
+    id 'checkstyle'
+    id 'pmd'
+    id 'com.github.spotbugs' version '1.7.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.google.guava:guava:$guavaVersion"
+
+    compileOnly "com.github.spotbugs:spotbugs-annotations:$spotbugsAnnotationsVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
+
+    testCompile "info.cukes:cucumber-java:$cucumberVersion"
+    testCompile "info.cukes:cucumber-junit:$cucumberVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+
+checkstyle {
+    configFile file("checkstyle.xml")
+}
+
+pmd {
+    ruleSetFiles "pmd-rules.xml"
+    ruleSets = []
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+task staticAnalysis(type: GradleBuild) {
+    tasks = [
+        'clean',
+        'checkstyleMain',
+        'checkstyleTest',
+        'pmdMain',
+        'pmdTest',
+        'spotbugsMain',
+        'spotbugsTest',
+    ]
+}
+
+mainClassName = 'nl.tudelft.jpacman.Launcher'
