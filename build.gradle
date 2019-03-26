@@ -7,6 +7,23 @@ plugins {
     id 'com.github.spotbugs' version '1.7.1'
 }
 
+sourceSets {
+    studentTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/student-test/java')
+        }
+        resources.srcDir file('src/student-test/resources')
+    }
+}
+
+configurations {
+    studentTestCompile.extendsFrom testCompile
+    studentTestImplementation.extendsFrom testImplementation
+    studentTestRuntime.extendsFrom testRuntime
+}
+
 repositories {
     mavenCentral()
 }
@@ -21,7 +38,17 @@ dependencies {
     testCompile "org.assertj:assertj-core:$assertjVersion"
 }
 
+task studentTest(type: Test) {
+    testClassesDirs = sourceSets.studentTest.output.classesDirs
+    classpath = sourceSets.studentTest.runtimeClasspath
+}
+test.dependsOn studentTest
+
 test {
+    useJUnitPlatform()
+}
+
+studentTest {
     useJUnitPlatform()
 }
 
@@ -51,10 +78,13 @@ task staticAnalysis(type: GradleBuild) {
         'clean',
         'checkstyleMain',
         'checkstyleTest',
+        'checkstyleStudentTest',
         'pmdMain',
         'pmdTest',
+        'pmdStudentTest',
         'spotbugsMain',
         'spotbugsTest',
+        'spotbugsStudentTest',
     ]
 }
 
