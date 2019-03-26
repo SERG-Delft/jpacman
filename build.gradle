@@ -56,6 +56,10 @@ jacoco {
     toolVersion = jacocoVersion
 }
 
+jacocoTestReport {
+    executionData tasks.withType(Test)
+}
+
 checkstyle {
     configFile file("checkstyle.xml")
     ignoreFailures = false
