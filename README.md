@@ -5,7 +5,7 @@
 ## About
 
 Pacman-like game used for teaching software testing.
-It exposes students to the use of git, maven, JUnit, and mockito.
+It exposes students to the use of git, Gradle, JUnit, and mockito.
 
 Parts of the code are well tested, whereas others are left untested intentionally. As a student in software testing, you can extend the test suite, or use the codebase to build extensions in a test-driven way. As a teacher, you can use JPacman to create your own testing exercises.
 
