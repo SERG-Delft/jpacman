@@ -6,12 +6,8 @@ stages:
 
 test:
   stage: test
-  script: "xvfb-run mvn -B test"
+  script: "xvfb-run ./gradlew test"
   
 warnings:
-    stage: static-analysis
-    script:
-        - "mvn -B test-compile checkstyle:check"
-        - "mvn -B spotbugs:check"
-        - "mvn -B pmd:check"
-
+  stage: static-analysis
+  script: "./gradlew staticAnalysis"
