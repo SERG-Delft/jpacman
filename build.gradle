@@ -19,9 +19,6 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
     testCompile "org.mockito:mockito-core:$mockitoVersion"
     testCompile "org.assertj:assertj-core:$assertjVersion"
-
-    testCompile "info.cukes:cucumber-java:$cucumberVersion"
-    testCompile "info.cukes:cucumber-junit:$cucumberVersion"
 }
 
 test {
