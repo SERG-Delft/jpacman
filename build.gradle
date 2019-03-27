@@ -8,20 +8,20 @@ plugins {
 }
 
 sourceSets {
-    studentTest {
+    defaultTest {
         java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir file('src/student-test/java')
+            srcDir file('src/default-test/java')
         }
-        resources.srcDir file('src/student-test/resources')
+        resources.srcDir file('src/default-test/resources')
     }
 }
 
 configurations {
-    studentTestCompile.extendsFrom testCompile
-    studentTestImplementation.extendsFrom testImplementation
-    studentTestRuntime.extendsFrom testRuntime
+    defaultTestCompile.extendsFrom testCompile
+    defaultTestImplementation.extendsFrom testImplementation
+    defaultTestRuntime.extendsFrom testRuntime
 }
 
 repositories {
@@ -38,17 +38,17 @@ dependencies {
     testCompile "org.assertj:assertj-core:$assertjVersion"
 }
 
-task studentTest(type: Test) {
-    testClassesDirs = sourceSets.studentTest.output.classesDirs
-    classpath = sourceSets.studentTest.runtimeClasspath
+task defaultTest(type: Test) {
+    testClassesDirs = sourceSets.defaultTest.output.classesDirs
+    classpath = sourceSets.defaultTest.runtimeClasspath
 }
-test.dependsOn studentTest
+test.dependsOn defaultTest
 
 test {
     useJUnitPlatform()
 }
 
-studentTest {
+defaultTest {
     useJUnitPlatform()
 }
 
@@ -82,13 +82,13 @@ task staticAnalysis(type: GradleBuild) {
         'clean',
         'checkstyleMain',
         'checkstyleTest',
-        'checkstyleStudentTest',
+        'checkstyleDefaultTest',
         'pmdMain',
         'pmdTest',
-        'pmdStudentTest',
+        'pmdDefaultTest',
         'spotbugsMain',
         'spotbugsTest',
-        'spotbugsStudentTest',
+        'spotbugsDefaultTest',
     ]
 }
 
