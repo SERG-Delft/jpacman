@@ -58,6 +58,9 @@ jacoco {
 
 jacocoTestReport {
     executionData tasks.withType(Test)
+    reports {
+        csv.enabled true
+    }
 }
 
 checkstyle {

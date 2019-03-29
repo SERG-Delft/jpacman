@@ -6,12 +6,11 @@ stages:
 
 test:
   stage: test
-  script: "xvfb-run mvn -B test"
-  
-warnings:
-    stage: static-analysis
-    script:
-        - "mvn -B test-compile checkstyle:check"
-        - "mvn -B spotbugs:check"
-        - "mvn -B pmd:check"
+  script:
+    - "xvfb-run ./gradlew test jacocoTestReport"
+    - "awk -F\",\" '{ instructions += $4 + $5; covered += $5 } END { print covered, \"/\", instructions, \" instructions covered\"; print 100*covered/instructions, \"% covered\" }' build/reports/jacoco/test/jacocoTestReport.csv"
+  coverage: /\d+.\d+ \% covered/
 
+warnings:
+  stage: static-analysis
+  script: "./gradlew staticAnalysis"
