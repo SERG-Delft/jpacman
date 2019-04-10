@@ -46,6 +46,7 @@ test.dependsOn defaultTest
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 defaultTest {
