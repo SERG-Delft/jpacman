@@ -17,11 +17,13 @@ import nl.tudelft.jpacman.level.LevelFactory;
 import nl.tudelft.jpacman.level.MapParser;
 import nl.tudelft.jpacman.level.Pellet;
 import nl.tudelft.jpacman.npc.Ghost;
+import nl.tudelft.jpacman.points.PointCalculator;
 import nl.tudelft.jpacman.sprite.PacManSprites;
 
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 /**
  * Tests the various methods provided by the {@link Navigation} class.
@@ -44,7 +46,7 @@ class NavigationTest {
     void setUp() {
         PacManSprites sprites = new PacManSprites();
         parser = new MapParser(new LevelFactory(sprites, new GhostFactory(
-            sprites)), new BoardFactory(sprites));
+            sprites)), new BoardFactory(sprites), Mockito.mock(PointCalculator.class));
     }
 
     /**
