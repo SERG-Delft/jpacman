@@ -13,6 +13,7 @@ import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.npc.Ghost;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import nl.tudelft.jpacman.points.PointCalculator;
 
 /**
  * Creates new {@link Level}s from text representations.
@@ -32,6 +33,11 @@ public class MapParser {
     private final BoardFactory boardCreator;
 
     /**
+     * The algorithm used to calculate points, given Pacman's actions
+     */
+    private PointCalculator pointCalculator;
+
+    /**
      * Creates a new map parser.
      *
      * @param levelFactory
@@ -39,9 +45,10 @@ public class MapParser {
      * @param boardFactory
      *            The factory providing the Square objects and the board.
      */
-    public MapParser(LevelFactory levelFactory, BoardFactory boardFactory) {
+    public MapParser(LevelFactory levelFactory, BoardFactory boardFactory, PointCalculator pointCalculator) {
         this.levelCreator = levelFactory;
         this.boardCreator = boardFactory;
+        this.pointCalculator = pointCalculator;
     }
 
     /**
@@ -73,7 +80,7 @@ public class MapParser {
         makeGrid(map, width, height, grid, ghosts, startPositions);
 
         Board board = boardCreator.createBoard(grid);
-        return levelCreator.createLevel(board, ghosts, startPositions);
+        return levelCreator.createLevel(board, ghosts, startPositions, pointCalculator);
     }
 
     private void makeGrid(char[][] map, int width, int height,

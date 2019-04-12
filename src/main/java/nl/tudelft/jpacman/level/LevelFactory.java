@@ -10,6 +10,7 @@ import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.npc.Ghost;
 import nl.tudelft.jpacman.npc.ghost.GhostColor;
 import nl.tudelft.jpacman.npc.ghost.GhostFactory;
+import nl.tudelft.jpacman.points.PointCalculator;
 import nl.tudelft.jpacman.sprite.PacManSprites;
 import nl.tudelft.jpacman.sprite.Sprite;
 
@@ -69,13 +70,15 @@ public class LevelFactory {
      *            A list of all ghosts on the board.
      * @param startPositions
      *            A list of squares from which players may start the game.
+     * @param pointCalculator
+     *            The algorithm to calculate the points.
      * @return A new level for the board.
      */
     public Level createLevel(Board board, List<Ghost> ghosts,
-                             List<Square> startPositions) {
+                             List<Square> startPositions, PointCalculator pointCalculator) {
 
         // We'll adopt the simple collision map for now.
-        CollisionMap collisionMap = new PlayerCollisions();
+        CollisionMap collisionMap = new PlayerCollisions(pointCalculator);
 
         return new Level(board, ghosts, startPositions, collisionMap);
     }

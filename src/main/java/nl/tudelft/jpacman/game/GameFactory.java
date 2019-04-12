@@ -2,6 +2,7 @@ package nl.tudelft.jpacman.game;
 
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.PlayerFactory;
+import nl.tudelft.jpacman.points.PointCalculator;
 
 /**
  * Factory that provides Game objects.
@@ -32,8 +33,8 @@ public class GameFactory {
      *            The level to create a game for.
      * @return A new single player game.
      */
-    public Game createSinglePlayerGame(Level level) {
-        return new SinglePlayerGame(playerFactory.createPacMan(), level);
+    public Game createSinglePlayerGame(Level level, PointCalculator pointCalculator) {
+        return new SinglePlayerGame(playerFactory.createPacMan(), level, pointCalculator);
     }
 
     /**

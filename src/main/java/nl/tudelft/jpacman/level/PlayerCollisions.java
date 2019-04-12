@@ -2,6 +2,7 @@ package nl.tudelft.jpacman.level;
 
 import nl.tudelft.jpacman.board.Unit;
 import nl.tudelft.jpacman.npc.Ghost;
+import nl.tudelft.jpacman.points.PointCalculator;
 
 /**
  * A simple implementation of a collision map for the JPacman player.
@@ -15,6 +16,12 @@ import nl.tudelft.jpacman.npc.Ghost;
  */
 
 public class PlayerCollisions implements CollisionMap {
+
+    private PointCalculator pointCalculator;
+
+    public PlayerCollisions(PointCalculator pointCalculator) {
+        this.pointCalculator = pointCalculator;
+    }
 
     @Override
     public void collide(Unit mover, Unit collidedOn) {
@@ -58,6 +65,7 @@ public class PlayerCollisions implements CollisionMap {
      * @param ghost The ghost involved in the collision.
      */
     public void playerVersusGhost(Player player, Ghost ghost) {
+        pointCalculator.collidedWithAGhost(player, ghost);
         player.setAlive(false);
     }
 
@@ -68,8 +76,8 @@ public class PlayerCollisions implements CollisionMap {
      * @param pellet The pellet involved in the collision.
      */
     public void playerVersusPellet(Player player, Pellet pellet) {
+        pointCalculator.foundAPellet(player, pellet);
         pellet.leaveSquare();
-        player.addPoints(pellet.getValue());
     }
 
 }
