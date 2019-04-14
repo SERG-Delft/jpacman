@@ -31,6 +31,9 @@ public class GameFactory {
      *
      * @param level
      *            The level to create a game for.
+     * @param pointCalculator
+     *             The way to calculate points upon collisions.
+     *
      * @return A new single player game.
      */
     public Game createSinglePlayerGame(Level level, PointCalculator pointCalculator) {

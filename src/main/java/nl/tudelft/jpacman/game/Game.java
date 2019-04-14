@@ -33,6 +33,9 @@ public abstract class Game implements LevelObserver {
 
     /**
      * Creates a new game.
+     *
+     * @param pointCalculator
+     *             The way to calculate points upon collisions.
      */
     protected Game(PointCalculator pointCalculator) {
         this.pointCalculator = pointCalculator;

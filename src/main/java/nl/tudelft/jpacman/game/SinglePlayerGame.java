@@ -32,6 +32,8 @@ public class SinglePlayerGame extends Game {
      *            The player.
      * @param level
      *            The level.
+     * @param pointCalculator
+     *            The way to calculate points upon collisions.
      */
     protected SinglePlayerGame(Player player, Level level, PointCalculator pointCalculator) {
         super(pointCalculator);
