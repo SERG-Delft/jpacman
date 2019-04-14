@@ -17,7 +17,7 @@ public interface CollisionMap {
      * @param <C1>
      *            The collider type.
      * @param <C2>
-     *            The collidee (unit that was pacmanMoved into) type.
+     *            The collidee (unit that was moved into) type.
      *
      * @param collider
      *            The unit that causes the collision by occupying a square with

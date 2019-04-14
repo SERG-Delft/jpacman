@@ -19,6 +19,11 @@ public class PlayerCollisions implements CollisionMap {
 
     private PointCalculator pointCalculator;
 
+    /**
+     * Create a simple player-based collision map, informing the
+     * point calculator about points to be added.
+     * @param pointCalculator Strategy for calculating points.
+     */
     public PlayerCollisions(PointCalculator pointCalculator) {
         this.pointCalculator = pointCalculator;
     }
