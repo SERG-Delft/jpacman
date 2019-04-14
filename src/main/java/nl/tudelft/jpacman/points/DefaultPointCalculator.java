@@ -5,7 +5,12 @@ import nl.tudelft.jpacman.level.Pellet;
 import nl.tudelft.jpacman.level.Player;
 import nl.tudelft.jpacman.npc.Ghost;
 
+/**
+ * A simple, minimalistic point calculator just
+ * adding points for each pellet consumed.
+ */
 public class DefaultPointCalculator implements PointCalculator {
+
     @Override
     public void collidedWithAGhost(Player player, Ghost ghost) {
         // no points for colliding with a ghost
