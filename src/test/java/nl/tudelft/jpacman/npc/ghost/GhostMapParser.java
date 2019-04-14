@@ -5,7 +5,6 @@ import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.level.LevelFactory;
 import nl.tudelft.jpacman.level.MapParser;
 import nl.tudelft.jpacman.npc.Ghost;
-import nl.tudelft.jpacman.points.PointCalculator;
 
 import java.util.List;
 
@@ -25,11 +24,10 @@ public final class GhostMapParser extends MapParser {
      * @param levelFactory The factory providing the NPC objects and the level.
      * @param boardFactory The factory to create board elements.
      * @param ghostFactory the factory to create the ghosts.
-     * @param pointCalculator the algorithm that calculates the pacman's points
      */
     public GhostMapParser(LevelFactory levelFactory, BoardFactory boardFactory,
-                          GhostFactory ghostFactory, PointCalculator pointCalculator) {
-        super(levelFactory, boardFactory, pointCalculator);
+                          GhostFactory ghostFactory) {
+        super(levelFactory, boardFactory);
         this.ghostFactory = ghostFactory;
     }
 

@@ -14,7 +14,6 @@ import nl.tudelft.jpacman.level.MapParser;
 import nl.tudelft.jpacman.level.Player;
 import nl.tudelft.jpacman.level.PlayerFactory;
 import nl.tudelft.jpacman.npc.ghost.GhostFactory;
-import nl.tudelft.jpacman.points.DefaultPointCalculator;
 import nl.tudelft.jpacman.points.PointCalculator;
 import nl.tudelft.jpacman.points.PointCalculatorLoader;
 import nl.tudelft.jpacman.sprite.PacManSprites;
@@ -103,7 +102,7 @@ public class Launcher {
      *         {@link #getLevelFactory()} and {@link #getBoardFactory()}.
      */
     protected MapParser getMapParser() {
-        return new MapParser(getLevelFactory(), getBoardFactory(), loadPointCalculator());
+        return new MapParser(getLevelFactory(), getBoardFactory());
     }
 
     /**
@@ -126,7 +125,7 @@ public class Launcher {
      *         and the ghosts from {@link #getGhostFactory()}.
      */
     protected LevelFactory getLevelFactory() {
-        return new LevelFactory(getSpriteStore(), getGhostFactory());
+        return new LevelFactory(getSpriteStore(), getGhostFactory(), loadPointCalculator());
     }
 
     /**

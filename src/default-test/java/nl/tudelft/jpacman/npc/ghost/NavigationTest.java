@@ -45,8 +45,10 @@ class NavigationTest {
     @BeforeEach
     void setUp() {
         PacManSprites sprites = new PacManSprites();
-        parser = new MapParser(new LevelFactory(sprites, new GhostFactory(
-            sprites)), new BoardFactory(sprites), Mockito.mock(PointCalculator.class));
+        LevelFactory lfact = new LevelFactory(sprites,
+            new GhostFactory(sprites),
+            Mockito.mock(PointCalculator.class));
+        parser = new MapParser(lfact, new BoardFactory(sprites));
     }
 
     /**

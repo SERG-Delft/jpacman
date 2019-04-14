@@ -48,17 +48,27 @@ public class LevelFactory {
     private final GhostFactory ghostFact;
 
     /**
+     * The way to calculate points upon collisions.
+     */
+    private final PointCalculator pointCalculator;
+
+    /**
      * Creates a new level factory.
      *
      * @param spriteStore
      *            The sprite store providing the sprites for units.
      * @param ghostFactory
      *            The factory providing ghosts.
+     * @param pointCalculator
+     *            The algorithm to calculate the points.
      */
-    public LevelFactory(PacManSprites spriteStore, GhostFactory ghostFactory) {
+    public LevelFactory(PacManSprites spriteStore,
+                        GhostFactory ghostFactory,
+                        PointCalculator pointCalculator) {
         this.sprites = spriteStore;
         this.ghostIndex = -1;
         this.ghostFact = ghostFactory;
+        this.pointCalculator = pointCalculator;
     }
 
     /**
@@ -70,12 +80,9 @@ public class LevelFactory {
      *            A list of all ghosts on the board.
      * @param startPositions
      *            A list of squares from which players may start the game.
-     * @param pointCalculator
-     *            The algorithm to calculate the points.
      * @return A new level for the board.
      */
-    public Level createLevel(Board board, List<Ghost> ghosts,
-                             List<Square> startPositions, PointCalculator pointCalculator) {
+    public Level createLevel(Board board, List<Ghost> ghosts, List<Square> startPositions) {
 
         // We'll adopt the simple collision map for now.
         CollisionMap collisionMap = new PlayerCollisions(pointCalculator);
