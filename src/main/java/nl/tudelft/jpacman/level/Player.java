@@ -35,6 +35,28 @@ public class Player extends Unit {
     private boolean alive;
 
     /**
+     * <code>Ghost</code> iff this player died by collision.
+     */
+    private Unit killer;
+
+    /**
+     * Returns the cause of death.
+     *
+     * @return <code>Unit</code> iff the player died by collision.
+     */
+    public Unit getKiller() { 
+        return killer;
+    }
+
+    /**
+     * Sets the cause of death.
+     *
+     * @param killer is set if collision with ghost happens.
+     */
+    public void setKiller(Unit killer) { 
+        this.killer =  killer; 
+    }
+    /**
      * Creates a new player with a score of 0 points.
      *
      * @param spriteMap
@@ -45,6 +67,7 @@ public class Player extends Unit {
     protected Player(Map<Direction, Sprite> spriteMap, AnimatedSprite deathAnimation) {
         this.score = 0;
         this.alive = true;
+        this.killer = null;
         this.sprites = spriteMap;
         this.deathSprite = deathAnimation;
         deathSprite.setAnimating(false);
@@ -73,6 +96,7 @@ public class Player extends Unit {
             deathSprite.restart();
         }
         this.alive = isAlive;
+        this.killer = null;
     }
 
     /**
