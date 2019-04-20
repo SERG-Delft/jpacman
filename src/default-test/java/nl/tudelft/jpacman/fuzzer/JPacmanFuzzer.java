@@ -7,6 +7,7 @@ import nl.tudelft.jpacman.level.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 
@@ -27,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Azqa Nadeem
  */
+@Disabled
 class JPacmanFuzzer {
     private static final int RUNS = 5;
     private static final String LOG_HEADER =
