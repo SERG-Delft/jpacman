@@ -40,23 +40,6 @@ public class Player extends Unit {
     private Unit killer;
 
     /**
-     * Returns the cause of death.
-     *
-     * @return <code>Unit</code> iff the player died by collision.
-     */
-    public Unit getKiller() { 
-        return killer;
-    }
-
-    /**
-     * Sets the cause of death.
-     *
-     * @param killer is set if collision with ghost happens.
-     */
-    public void setKiller(Unit killer) { 
-        this.killer =  killer; 
-    }
-    /**
      * Creates a new player with a score of 0 points.
      *
      * @param spriteMap
@@ -97,6 +80,24 @@ public class Player extends Unit {
         }
         this.alive = isAlive;
         this.killer = null;
+    }
+
+    /**
+     * Returns the unit that caused the death of Pac-Man.
+     *
+     * @return <code>Unit</code> iff the player died by collision, otherwise <code>null</code>.
+     */
+    public Unit getKiller() {
+        return killer;
+    }
+
+    /**
+     * Sets the cause of death.
+     *
+     * @param killer is set if collision with ghost happens.
+     */
+    public void setKiller(Unit killer) {
+        this.killer =  killer;
     }
 
     /**
