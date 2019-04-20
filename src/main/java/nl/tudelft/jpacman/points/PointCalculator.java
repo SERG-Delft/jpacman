@@ -33,7 +33,7 @@ public interface PointCalculator {
      * @param pellet
      *            The pellet consumed.
      */
-    void foundAPellet(Player player, Pellet pellet);
+    void consumedAPellet(Player player, Pellet pellet);
 
     /**
      * Method called whevener a player makes a successful move.

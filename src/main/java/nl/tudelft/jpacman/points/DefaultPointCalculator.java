@@ -17,7 +17,7 @@ public class DefaultPointCalculator implements PointCalculator {
     }
 
     @Override
-    public void foundAPellet(Player player, Pellet pellet) {
+    public void consumedAPellet(Player player, Pellet pellet) {
         player.addPoints(pellet.getValue());
     }
 

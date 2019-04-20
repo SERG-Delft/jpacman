@@ -54,7 +54,7 @@ public class DefaultPlayerInteractionMap implements CollisionMap {
 
         collisionMap.onCollision(Player.class, Pellet.class,
             (player, pellet) -> {
-                pointCalculator.foundAPellet(player, pellet);
+                pointCalculator.consumedAPellet(player, pellet);
                 pellet.leaveSquare();
             });
         return collisionMap;

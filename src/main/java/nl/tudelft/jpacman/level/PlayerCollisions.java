@@ -87,7 +87,7 @@ public class PlayerCollisions implements CollisionMap {
      *           The pellet involved in the collision.
      */
     public void playerVersusPellet(Player player, Pellet pellet) {
-        pointCalculator.foundAPellet(player, pellet);
+        pointCalculator.consumedAPellet(player, pellet);
         pellet.leaveSquare();
     }
 
