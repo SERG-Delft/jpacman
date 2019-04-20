@@ -23,13 +23,11 @@ import nl.tudelft.jpacman.sprite.PacManSprites;
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 /**
  * Tests the various methods provided by the {@link Navigation} class.
  *
  * @author Jeroen Roosen
- *
  */
 @SuppressWarnings({"magicnumber", "PMD.AvoidDuplicateLiterals"})
 class NavigationTest {
@@ -45,10 +43,11 @@ class NavigationTest {
     @BeforeEach
     void setUp() {
         PacManSprites sprites = new PacManSprites();
-        LevelFactory lfact = new LevelFactory(sprites,
+        LevelFactory levelFactory = new LevelFactory(
+            sprites,
             new GhostFactory(sprites),
-            Mockito.mock(PointCalculator.class));
-        parser = new MapParser(lfact, new BoardFactory(sprites));
+            mock(PointCalculator.class));
+        parser = new MapParser(levelFactory, new BoardFactory(sprites));
     }
 
     /**
