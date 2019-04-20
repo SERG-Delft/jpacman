@@ -9,6 +9,7 @@ public class PointCalculatorLoader {
 
     /**
      * Load a points calculator and return it.
+     *
      * @return The (dynamically loaded) points calculator.
      */
     public PointCalculator load() {

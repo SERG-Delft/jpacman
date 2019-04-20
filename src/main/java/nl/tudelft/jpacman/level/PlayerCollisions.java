@@ -22,7 +22,9 @@ public class PlayerCollisions implements CollisionMap {
     /**
      * Create a simple player-based collision map, informing the
      * point calculator about points to be added.
-     * @param pointCalculator Strategy for calculating points.
+     *
+     * @param pointCalculator
+     *             Strategy for calculating points.
      */
     public PlayerCollisions(PointCalculator pointCalculator) {
         this.pointCalculator = pointCalculator;
@@ -66,8 +68,10 @@ public class PlayerCollisions implements CollisionMap {
     /**
      * Actual case of player bumping into ghost or vice versa.
      *
-     * @param player The player involved in the collision.
-     * @param ghost The ghost involved in the collision.
+     * @param player
+     *          The player involved in the collision.
+     * @param ghost
+     *          The ghost involved in the collision.
      */
     public void playerVersusGhost(Player player, Ghost ghost) {
         pointCalculator.collidedWithAGhost(player, ghost);
@@ -77,8 +81,10 @@ public class PlayerCollisions implements CollisionMap {
     /**
      * Actual case of player consuming a pellet.
      *
-     * @param player The player involved in the collision.
-     * @param pellet The pellet involved in the collision.
+     * @param player
+     *           The player involved in the collision.
+     * @param pellet
+     *           The pellet involved in the collision.
      */
     public void playerVersusPellet(Player player, Pellet pellet) {
         pointCalculator.foundAPellet(player, pellet);

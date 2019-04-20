@@ -16,24 +16,33 @@ public interface PointCalculator {
     /**
      * Method called whenever a player meets a ghost.
      * It can be used to update the player's points accordingly.
-     * @param player The player that will die.
-     * @param ghost The ghost causing the player to die.
+     *
+     * @param player
+     *            The player that will die.
+     * @param ghost
+     *            The ghost causing the player to die.
      */
     void collidedWithAGhost(Player player, Ghost ghost);
 
     /**
      * Method called whenever a player consumes a pellet.
      * It can be used to update the player's points accordingly.
-     * @param player The player consuming a pellet
-     * @param pellet The pellet consumed.
+     *
+     * @param player
+     *            The player consuming a pellet
+     * @param pellet
+     *            The pellet consumed.
      */
     void foundAPellet(Player player, Pellet pellet);
 
     /**
      * Method called whevener a player makes a successful move.
      * It can be used to update the player's points accordingly.
-     * @param player The player making a move.
-     * @param direction The direction of the move.
+     *
+     * @param player
+     *           The player making a move.
+     * @param direction
+     *           The direction of the move.
      */
     void pacmanMoved(Player player, Direction direction);
 }
