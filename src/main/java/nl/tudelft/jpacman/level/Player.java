@@ -50,7 +50,6 @@ public class Player extends Unit {
     protected Player(Map<Direction, Sprite> spriteMap, AnimatedSprite deathAnimation) {
         this.score = 0;
         this.alive = true;
-        this.killer = null;
         this.sprites = spriteMap;
         this.deathSprite = deathAnimation;
         deathSprite.setAnimating(false);
@@ -68,18 +67,20 @@ public class Player extends Unit {
     /**
      * Sets whether this player is alive or not.
      *
+     * If the player comes back alive, the {@link killer} will be reset.
+     *
      * @param isAlive
      *            <code>true</code> iff this player is alive.
      */
     public void setAlive(boolean isAlive) {
         if (isAlive) {
             deathSprite.setAnimating(false);
+            this.killer = null;
         }
         if (!isAlive) {
             deathSprite.restart();
         }
         this.alive = isAlive;
-        this.killer = null;
     }
 
     /**
