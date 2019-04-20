@@ -10,6 +10,7 @@ import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.npc.Ghost;
 import nl.tudelft.jpacman.npc.ghost.GhostColor;
 import nl.tudelft.jpacman.npc.ghost.GhostFactory;
+import nl.tudelft.jpacman.points.PointCalculator;
 import nl.tudelft.jpacman.sprite.PacManSprites;
 import nl.tudelft.jpacman.sprite.Sprite;
 
@@ -47,17 +48,27 @@ public class LevelFactory {
     private final GhostFactory ghostFact;
 
     /**
+     * The way to calculate points upon collisions.
+     */
+    private final PointCalculator pointCalculator;
+
+    /**
      * Creates a new level factory.
      *
      * @param spriteStore
      *            The sprite store providing the sprites for units.
      * @param ghostFactory
      *            The factory providing ghosts.
+     * @param pointCalculator
+     *            The algorithm to calculate the points.
      */
-    public LevelFactory(PacManSprites spriteStore, GhostFactory ghostFactory) {
+    public LevelFactory(PacManSprites spriteStore,
+                        GhostFactory ghostFactory,
+                        PointCalculator pointCalculator) {
         this.sprites = spriteStore;
         this.ghostIndex = -1;
         this.ghostFact = ghostFactory;
+        this.pointCalculator = pointCalculator;
     }
 
     /**
@@ -71,11 +82,10 @@ public class LevelFactory {
      *            A list of squares from which players may start the game.
      * @return A new level for the board.
      */
-    public Level createLevel(Board board, List<Ghost> ghosts,
-                             List<Square> startPositions) {
+    public Level createLevel(Board board, List<Ghost> ghosts, List<Square> startPositions) {
 
         // We'll adopt the simple collision map for now.
-        CollisionMap collisionMap = new PlayerCollisions();
+        CollisionMap collisionMap = new PlayerCollisions(pointCalculator);
 
         return new Level(board, ghosts, startPositions, collisionMap);
     }

@@ -2,6 +2,7 @@ package nl.tudelft.jpacman.level;
 
 import nl.tudelft.jpacman.board.Unit;
 import nl.tudelft.jpacman.npc.Ghost;
+import nl.tudelft.jpacman.points.PointCalculator;
 
 /**
  * A simple implementation of a collision map for the JPacman player.
@@ -15,6 +16,19 @@ import nl.tudelft.jpacman.npc.Ghost;
  */
 
 public class PlayerCollisions implements CollisionMap {
+
+    private PointCalculator pointCalculator;
+
+    /**
+     * Create a simple player-based collision map, informing the
+     * point calculator about points to be added.
+     *
+     * @param pointCalculator
+     *             Strategy for calculating points.
+     */
+    public PlayerCollisions(PointCalculator pointCalculator) {
+        this.pointCalculator = pointCalculator;
+    }
 
     @Override
     public void collide(Unit mover, Unit collidedOn) {
@@ -54,22 +68,27 @@ public class PlayerCollisions implements CollisionMap {
     /**
      * Actual case of player bumping into ghost or vice versa.
      *
-     * @param player The player involved in the collision.
-     * @param ghost The ghost involved in the collision.
+     * @param player
+     *          The player involved in the collision.
+     * @param ghost
+     *          The ghost involved in the collision.
      */
     public void playerVersusGhost(Player player, Ghost ghost) {
+        pointCalculator.collidedWithAGhost(player, ghost);
         player.setAlive(false);
     }
 
     /**
      * Actual case of player consuming a pellet.
      *
-     * @param player The player involved in the collision.
-     * @param pellet The pellet involved in the collision.
+     * @param player
+     *           The player involved in the collision.
+     * @param pellet
+     *           The pellet involved in the collision.
      */
     public void playerVersusPellet(Player player, Pellet pellet) {
+        pointCalculator.consumedAPellet(player, pellet);
         pellet.leaveSquare();
-        player.addPoints(pellet.getValue());
     }
 
 }

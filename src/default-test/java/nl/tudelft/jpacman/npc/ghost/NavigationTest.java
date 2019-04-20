@@ -17,6 +17,7 @@ import nl.tudelft.jpacman.level.LevelFactory;
 import nl.tudelft.jpacman.level.MapParser;
 import nl.tudelft.jpacman.level.Pellet;
 import nl.tudelft.jpacman.npc.Ghost;
+import nl.tudelft.jpacman.points.PointCalculator;
 import nl.tudelft.jpacman.sprite.PacManSprites;
 
 import com.google.common.collect.Lists;
@@ -27,7 +28,6 @@ import org.junit.jupiter.api.Test;
  * Tests the various methods provided by the {@link Navigation} class.
  *
  * @author Jeroen Roosen
- *
  */
 @SuppressWarnings({"magicnumber", "PMD.AvoidDuplicateLiterals"})
 class NavigationTest {
@@ -43,8 +43,11 @@ class NavigationTest {
     @BeforeEach
     void setUp() {
         PacManSprites sprites = new PacManSprites();
-        parser = new MapParser(new LevelFactory(sprites, new GhostFactory(
-            sprites)), new BoardFactory(sprites));
+        LevelFactory levelFactory = new LevelFactory(
+            sprites,
+            new GhostFactory(sprites),
+            mock(PointCalculator.class));
+        parser = new MapParser(levelFactory, new BoardFactory(sprites));
     }
 
     /**

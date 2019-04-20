@@ -6,6 +6,7 @@ import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Level.LevelObserver;
 import nl.tudelft.jpacman.level.Player;
+import nl.tudelft.jpacman.points.PointCalculator;
 
 /**
  * A basic implementation of a Pac-Man game.
@@ -25,9 +26,19 @@ public abstract class Game implements LevelObserver {
     private final Object progressLock = new Object();
 
     /**
-     * Creates a new game.
+     * The algorithm used to calculate the points that
+     * they player gets whenever some action happens.
      */
-    protected Game() {
+    private PointCalculator pointCalculator;
+
+    /**
+     * Creates a new game.
+     *
+     * @param pointCalculator
+     *             The way to calculate points upon collisions.
+     */
+    protected Game(PointCalculator pointCalculator) {
+        this.pointCalculator = pointCalculator;
         inProgress = false;
     }
 
@@ -89,6 +100,7 @@ public abstract class Game implements LevelObserver {
         if (isInProgress()) {
             // execute player move.
             getLevel().move(player, direction);
+            pointCalculator.pacmanMoved(player, direction);
         }
     }
 

@@ -6,6 +6,7 @@ import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Player;
 
 import com.google.common.collect.ImmutableList;
+import nl.tudelft.jpacman.points.PointCalculator;
 
 /**
  * A game with one player and a single level.
@@ -31,8 +32,12 @@ public class SinglePlayerGame extends Game {
      *            The player.
      * @param level
      *            The level.
+     * @param pointCalculator
+     *            The way to calculate points upon collisions.
      */
-    protected SinglePlayerGame(Player player, Level level) {
+    protected SinglePlayerGame(Player player, Level level, PointCalculator pointCalculator) {
+        super(pointCalculator);
+
         assert player != null;
         assert level != null;
 
