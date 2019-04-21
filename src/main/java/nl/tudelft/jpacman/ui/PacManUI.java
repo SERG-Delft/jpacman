@@ -52,7 +52,7 @@ public class PacManUI extends JFrame {
     private final BoardPanel boardPanel;
 
     /**
-     * Creates a new UI for a JPac-Man game.
+     * Creates a new UI for a JPacman game.
      *
      * @param game
      *            The game to play.
@@ -68,7 +68,7 @@ public class PacManUI extends JFrame {
     public PacManUI(final Game game, final Map<String, Action> buttons,
                     final Map<Integer, Action> keyMappings,
                     ScoreFormatter scoreFormatter) {
-        super("JPac-Man");
+        super("JPacman");
         assert game != null;
         assert buttons != null;
         assert keyMappings != null;
