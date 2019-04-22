@@ -8,6 +8,8 @@ via our fuzzer. See the assignment for more instructions.
 
 # Usage
 
-`python plotLogs.py <path/to/logs.txt>`
+`python plotLogs.py <path/to/logfile.txt>`
+
+Requirements: Python 2.7 or higher, python-tk, and matplotlib.
 
  
