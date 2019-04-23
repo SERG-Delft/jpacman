@@ -17,10 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Random;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * A basic fuzzer trying out random moves and writing logs in output files. Number of runs is a
@@ -33,9 +30,11 @@ class JPacmanFuzzer {
     private static final int RUNS = 5;
     private static final String LOG_HEADER =
         "isAlive, hasCollided, currentDirection, nextDirection, remainingPellets, score";
+    private static final String BASE_LOG_DIRECTORY = "behavioral-analysis/logs";
+
+    private static File logDirectory;
 
     private Launcher launcher;
-    private BufferedWriter logWriter;
 
     /**
      * Sets and cleans up directory for storing logs.
@@ -44,11 +43,10 @@ class JPacmanFuzzer {
      */
     @BeforeAll
     static void setUpLogging() throws IOException {
-        File dir = new File("logs");
-        if (!dir.exists() && !dir.mkdirs()) {
-            throw new IOException("Directory `logs/` could not be created.");
+        logDirectory = new File(BASE_LOG_DIRECTORY, Long.toString(System.currentTimeMillis()));
+        if (!logDirectory.exists() && !logDirectory.mkdirs()) {
+            throw new IOException("Directory `behavioral-analysis/` could not be created.");
         }
-        Arrays.stream(dir.listFiles()).forEach(File::delete);
     }
 
     /**
@@ -68,8 +66,6 @@ class JPacmanFuzzer {
     @AfterEach
     void tearDown() throws IOException {
         launcher.dispose();
-        logWriter.flush();
-        logWriter.close();
     }
 
     /**
@@ -81,29 +77,31 @@ class JPacmanFuzzer {
     @RepeatedTest(RUNS)
     void fuzzerTest(RepetitionInfo repetitionInfo) throws IOException {
         Game game = launcher.getGame();
-        Player player = game.getPlayers().get(0);
         Direction chosen = Direction.EAST;
 
-        String filename = "logs/log" + repetitionInfo.getCurrentRepetition() + ".txt";
-        logWriter = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream(filename, true), StandardCharsets.UTF_8));
-        logWriter.write(LOG_HEADER);
+        String logFileName = "log_" + repetitionInfo.getCurrentRepetition() + ".txt";
+        File logFile = new File(logDirectory, logFileName);
 
-        try {
-            game.start();
-            assertThat(game.isInProgress()).isTrue();
+        try (BufferedWriter logWriter = new BufferedWriter(new OutputStreamWriter(
+            new FileOutputStream(logFile, true), StandardCharsets.UTF_8))) {
 
-            while (game.isInProgress()) {
-                chosen = getRandomDirection();
+            logWriter.write(LOG_HEADER);
 
-                log(chosen);
-                game.getLevel().move(player, chosen);
+            try {
+                game.start();
+
+                while (game.isInProgress()) {
+                    chosen = getRandomDirection();
+
+                    log(logWriter, chosen);
+                    game.getLevel().move(game.getPlayers().get(0), chosen);
+                }
+            } catch (RuntimeException e) {
+                // Runtime exceptions should not stop the execution of the fuzzer
+            } finally {
+                log(logWriter, chosen);
+                game.stop();
             }
-            log(chosen);
-            game.stop();
-        } catch (RuntimeException e) {
-            log(chosen);
-            game.stop();
         }
     }
 
@@ -111,7 +109,7 @@ class JPacmanFuzzer {
         return Direction.values()[new Random().nextInt(Direction.values().length)];
     }
 
-    private void log(Direction chosen) throws IOException {
+    private void log(BufferedWriter logWriter, Direction chosen) throws IOException {
         Game game = launcher.getGame();
         Player player = game.getPlayers().get(0);
 
