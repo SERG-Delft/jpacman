@@ -35,7 +35,7 @@ public class Player extends Unit {
     private boolean alive;
 
     /**
-     * <code>Ghost</code> iff this player died by collision.
+     * {@link Unit} iff this player died by collision, <code>null</code> otherwise.
      */
     private Unit killer;
 
