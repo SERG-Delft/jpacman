@@ -9,8 +9,12 @@ jobs:
       jdk: oraclejdk8
     - script: ./gradlew test
       jdk: oraclejdk9
+    - script: ./gradlew test
+      jdk: oraclejdk11
     - stage: "Static Analysis"
       script: ./gradlew staticAnalysis
       jdk: oraclejdk8
     - script: ./gradlew staticAnalysis
       jdk: oraclejdk9
+    - script: ./gradlew staticAnalysis
+      jdk: oraclejdk11
