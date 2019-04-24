@@ -35,6 +35,11 @@ public class Player extends Unit {
     private boolean alive;
 
     /**
+     * {@link Unit} iff this player died by collision, <code>null</code> otherwise.
+     */
+    private Unit killer;
+
+    /**
      * Creates a new player with a score of 0 points.
      *
      * @param spriteMap
@@ -62,17 +67,38 @@ public class Player extends Unit {
     /**
      * Sets whether this player is alive or not.
      *
+     * If the player comes back alive, the {@link killer} will be reset.
+     *
      * @param isAlive
      *            <code>true</code> iff this player is alive.
      */
     public void setAlive(boolean isAlive) {
         if (isAlive) {
             deathSprite.setAnimating(false);
+            this.killer = null;
         }
         if (!isAlive) {
             deathSprite.restart();
         }
         this.alive = isAlive;
+    }
+
+    /**
+     * Returns the unit that caused the death of Pac-Man.
+     *
+     * @return <code>Unit</code> iff the player died by collision, otherwise <code>null</code>.
+     */
+    public Unit getKiller() {
+        return killer;
+    }
+
+    /**
+     * Sets the cause of death.
+     *
+     * @param killer is set if collision with ghost happens.
+     */
+    public void setKiller(Unit killer) {
+        this.killer =  killer;
     }
 
     /**
