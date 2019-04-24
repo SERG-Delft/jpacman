@@ -1,5 +1,7 @@
 package nl.tudelft.jpacman.sprite;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,6 +59,10 @@ public class SpriteStore {
      * @throws IOException
      *             When the resource could not be loaded.
      */
+    @SuppressFBWarnings(
+        value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        justification = "false positive in java 11"
+    )
     private Sprite loadSpriteFromResource(String resource) throws IOException {
         try (InputStream input = SpriteStore.class.getResourceAsStream(resource)) {
             if (input == null) {
