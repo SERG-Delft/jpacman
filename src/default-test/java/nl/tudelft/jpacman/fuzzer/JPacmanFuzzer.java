@@ -117,7 +117,7 @@ class JPacmanFuzzer {
             String.format(
                 "%n%b %b %s %s %d %d",
                 player.isAlive(),
-                (player.getKiller() == null),
+                (player.getKiller() != null),
                 player.getDirection(),
                 chosen,
                 game.getLevel().remainingPellets(),
