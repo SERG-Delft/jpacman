@@ -19,4 +19,20 @@ public class DirectionTest {
         Direction north = Direction.valueOf("NORTH");
         assertThat(north.getDeltaY()).isEqualTo(-1);
     }
+
+    /**
+     * The correct opposite is returned.
+     */
+    @Test
+    void testOpposite() {
+        assertThat(Direction.NORTH.getOpposite()).isEqualTo(Direction.SOUTH);
+    }
+
+    /**
+     * The opposite of the opposite is the original.
+     */
+    @Test
+    void testOppositeTwice() {
+        assertThat(Direction.WEST.getOpposite().getOpposite()).isEqualTo(Direction.WEST);
+    }
 }

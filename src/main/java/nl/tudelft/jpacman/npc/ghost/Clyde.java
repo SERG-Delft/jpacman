@@ -1,6 +1,5 @@
 package nl.tudelft.jpacman.npc.ghost;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -58,18 +57,6 @@ public class Clyde extends Ghost {
     private static final int MOVE_INTERVAL = 250;
 
     /**
-     * A map of opposite directions.
-     */
-    private static final Map<Direction, Direction> OPPOSITES = new EnumMap<>(Direction.class);
-
-    static {
-        OPPOSITES.put(Direction.NORTH, Direction.SOUTH);
-        OPPOSITES.put(Direction.SOUTH, Direction.NORTH);
-        OPPOSITES.put(Direction.WEST, Direction.EAST);
-        OPPOSITES.put(Direction.EAST, Direction.WEST);
-    }
-
-    /**
      * Creates a new "Clyde", a.k.a. "Pokey".
      *
      * @param spriteMap The sprites for this ghost.
@@ -105,7 +92,7 @@ public class Clyde extends Ghost {
         if (path != null && !path.isEmpty()) {
             Direction direction = path.get(0);
             if (path.size() <= SHYNESS) {
-                return Optional.ofNullable(OPPOSITES.get(direction));
+                return Optional.of(direction.getOpposite());
             }
             return Optional.of(direction);
         }

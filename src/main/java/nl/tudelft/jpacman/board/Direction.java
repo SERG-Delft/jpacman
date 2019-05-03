@@ -3,7 +3,7 @@ package nl.tudelft.jpacman.board;
 /**
  * An enumeration of possible directions on a two-dimensional square grid.
  *
- * @author Jeroen Roosen 
+ * @author Jeroen Roosen
  */
 public enum Direction {
 
@@ -68,5 +68,23 @@ public enum Direction {
      */
     public int getDeltaY() {
         return deltaY;
+    }
+
+    /**
+     * @return The direction that is opposite to this direction.
+     */
+    public Direction getOpposite() {
+        switch (this) {
+            case NORTH:
+                return SOUTH;
+            case SOUTH:
+                return NORTH;
+            case WEST:
+                return EAST;
+            case EAST:
+                return WEST;
+            default:
+                throw new IllegalStateException("Received an unknown enum value.");
+        }
     }
 }
