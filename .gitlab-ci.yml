@@ -14,3 +14,4 @@ test:
 warnings:
   stage: static-analysis
   script: "./gradlew staticAnalysis"
+  allow_failure: true
