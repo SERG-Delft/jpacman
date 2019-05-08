@@ -92,7 +92,7 @@ public class Clyde extends Ghost {
         if (path != null && !path.isEmpty()) {
             Direction direction = path.get(0);
             if (path.size() <= SHYNESS) {
-                return Optional.of(direction.getOpposite());
+                return Optional.of(direction.opposite());
             }
             return Optional.of(direction);
         }

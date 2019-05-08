@@ -25,7 +25,7 @@ public class DirectionTest {
      */
     @Test
     void testOpposite() {
-        assertThat(Direction.NORTH.getOpposite()).isEqualTo(Direction.SOUTH);
+        assertThat(Direction.NORTH.opposite()).isEqualTo(Direction.SOUTH);
     }
 
     /**
@@ -33,6 +33,6 @@ public class DirectionTest {
      */
     @Test
     void testOppositeTwice() {
-        assertThat(Direction.WEST.getOpposite().getOpposite()).isEqualTo(Direction.WEST);
+        assertThat(Direction.WEST.opposite().opposite()).isEqualTo(Direction.WEST);
     }
 }
