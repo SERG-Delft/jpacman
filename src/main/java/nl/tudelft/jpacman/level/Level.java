@@ -263,6 +263,8 @@ public class Level {
      * Updates the observers about the state of this level.
      */
     private void updateObservers() {
+        Iterable<LevelObserver> observers = new ArrayList<>(this.observers);
+
         if (!isAnyPlayerAlive()) {
             for (LevelObserver observer : observers) {
                 observer.levelLost();
